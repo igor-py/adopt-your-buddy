@@ -1,17 +1,14 @@
 import { useState } from 'react'
 import TestChildren from './TestChildren'
-import foto from '../images/Nala 1.jpg'
-import foto2 from '../images/Nala 2.jpg'
-import foto3 from '../images/Nala 3.jpg'
-import foto4 from '../images/FotoNalaDeFone.jpg'
 
-function Pet({ name }) {
-    const [img, setImg] = useState(foto)
-    let click = false
+function Pet({ name, lstImg, description, contact, age }) {
+    const [imgPosition, setImgPosition] = useState(0)
+    const img = lstImg[imgPosition]
 
     const handleImgClick = () => {
-        setImg(img === foto ? foto4 : foto)
-        click = !click
+        setImgPosition((prevState) => {
+            return prevState === lstImg.length - 1 ? 0 : prevState + 1
+        })
     }
 
     return (
@@ -25,24 +22,24 @@ function Pet({ name }) {
             </div>
             <div className="border-2 border-black rounded-md shadow-md w-1/2 m-2 bg-blue-200 flex flex-col justify-evenly content-center">
                 <div className="w-5/6 h-1/4 mx-auto text-lg font-light font-serif text-center text-lime-700 m-2 p-4 border-2 border-black">
-                    Campo de descrição
+                    {description}
                 </div>
                 <div className="w-1/2 mx-auto text-lg font-light font-serif text-center text-lime-700 m-2 p-4 border-2 border-black">
                     {name}
                 </div>
                 <div className="w-1/2 mx-auto text-lg font-light font-serif text-center text-lime-700 m-2 p-4 border-2 border-black">
-                    Responsável - Contato
+                    Resposável: {contact}
                 </div>
                 <div className="w-1/2 mx-auto text-lg font-light font-serif text-center text-lime-700 m-2 p-4 border-2 border-black">
-                    Idade - 9 Meses
+                    Idade: {age}
                 </div>
             </div>
             <button
-                    className="my-auto m-2 p-4 hover:bg-black"
-                    onClick={handleImgClick}
-                >
-                    Click Me
-                </button>
+                className="my-auto m-2 p-4 hover:bg-black"
+                onClick={handleImgClick}
+            >
+                Click Me
+            </button>
         </div>
     )
 }

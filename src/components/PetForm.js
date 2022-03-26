@@ -1,7 +1,7 @@
 import Input from './InputUtil';
 import { useState } from 'react';
 
-function PetForm() {
+function PetForm({onFormSave}) {
 
     const [userInput, setUserInput] = useState({
         petName: '',
@@ -49,9 +49,6 @@ function PetForm() {
         });
     };
 
-
-
-
     // Ainda falta colocar o input para as fotos dos pets.
     const submitHandler = (event) => {
         event.preventDefault();
@@ -72,7 +69,10 @@ function PetForm() {
             cep: event.target[7].value
         };
 
+        onFormSave(petData);
+
         console.log('petData', petData);
+        // Tem que limpar os valores antigos do campos.
         setUserInput({
             petName: '',
             petAge: '',
