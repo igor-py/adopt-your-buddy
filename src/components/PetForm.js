@@ -1,8 +1,8 @@
-import Input from './InputUtil';
-import { useState } from 'react';
+import Input from './InputUtil'
+import { useState } from 'react'
+import xImg from '../images/x.svg'
 
-function PetForm({onFormSave}) {
-
+function PetForm({ onFormSave, onFormClose }) {
     const [userInput, setUserInput] = useState({
         petName: '',
         petAge: '',
@@ -10,55 +10,58 @@ function PetForm({onFormSave}) {
         petResponsible: '',
         petPhone: '',
         petCep: '',
-    });
+    })
 
-    // If your state update depends on a previous value always use this kind of function 
+    // If your state update depends on a previous value always use this kind of function
     const petNameHandler = (event) => {
         setUserInput((prevState) => {
-            return {...prevState, petName: event.target.value};
-        });
-    };
-    
+            return { ...prevState, petName: event.target.value }
+        })
+    }
+
     const petAgeHandler = (event) => {
         setUserInput((prevState) => {
-            return {...prevState, petAge: event.target.value};
-        });
-    };
+            return { ...prevState, petAge: event.target.value }
+        })
+    }
 
     const petDescriptionHandler = (event) => {
         setUserInput((prevState) => {
-            return {...prevState, petDescription: event.target.value};
-        });
-    };
+            return { ...prevState, petDescription: event.target.value }
+        })
+    }
 
     const petResponsibleHandler = (event) => {
         setUserInput((prevState) => {
-            return {...prevState, petResponsible: event.target.value};
-        });
-    };
+            return { ...prevState, petResponsible: event.target.value }
+        })
+    }
 
     const petPhoneHandler = (event) => {
         setUserInput((prevState) => {
-            return {...prevState, petPhone: event.target.value};
-        });
-    };
+            return { ...prevState, petPhone: event.target.value }
+        })
+    }
 
     const petCepHandler = (event) => {
         setUserInput((prevState) => {
-            return {...prevState, petCep: event.target.value};
-        });
-    };
+            return { ...prevState, petCep: event.target.value }
+        })
+    }
 
     // Ainda falta colocar o input para as fotos dos pets.
     const submitHandler = (event) => {
-        event.preventDefault();
+        event.preventDefault()
 
         // Coleta os valores de input do campo Name
-        console.log('Event', event);
+        console.log('Event', event)
 
-        const greaterThanOne = parseInt(event.target[1].value) > 1 ? true : false;
+        const greaterThanOne =
+            parseInt(event.target[1].value) > 1 ? true : false
 
-        const monthOrYear = event.target[2].checked ? `${greaterThanOne ? 'Meses' : 'Mês'}` : `${greaterThanOne ? 'Anos' : 'Ano'}`;
+        const monthOrYear = event.target[2].checked
+            ? `${greaterThanOne ? 'Meses' : 'Mês'}`
+            : `${greaterThanOne ? 'Anos' : 'Ano'}`
 
         const petData = {
             name: event.target[0].value,
@@ -66,12 +69,12 @@ function PetForm({onFormSave}) {
             description: event.target[4].value,
             responsible: event.target[5].value,
             phone: event.target[6].value,
-            cep: event.target[7].value
-        };
+            cep: event.target[7].value,
+        }
 
-        onFormSave(petData);
+        onFormSave(petData)
 
-        console.log('petData', petData);
+        console.log('petData', petData)
         // Tem que limpar os valores antigos do campos.
         setUserInput({
             petName: '',
@@ -83,10 +86,22 @@ function PetForm({onFormSave}) {
         })
     }
 
+    const closeForm = () => {
+        onFormClose();
+    }
 
     return (
-        <div className="mt-32 m-4 border-2 border-black w-1/2 mx-auto">
-            <form onSubmit={submitHandler} className="flex flex-col text-center">
+        <div className="mt-32 m-2 border-2 border-black w-1/2 mx-auto">
+            <div className="flex flex-row justify-end">
+                <button className="hover:translate-y-1" onClick={closeForm}>
+                    <img src={xImg} alt="Logo to close de form" className="w-8 h-8"></img>
+                </button>
+            </div>
+
+            <form
+                onSubmit={submitHandler}
+                className="flex flex-col text-center"
+            >
                 <div className="m-2">
                     <label htmlFor="name">Nome</label>
                     <input
@@ -186,7 +201,9 @@ function PetForm({onFormSave}) {
                     />
                 </div>
 
-                <button className="m-2 p-2 border-2 border-black mx-auto">Enviar</button>
+                <button className="m-2 p-2 border-2 border-black mx-auto">
+                    Enviar
+                </button>
             </form>
         </div>
     )
