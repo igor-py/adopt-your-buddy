@@ -87,25 +87,32 @@ function PetForm({ onFormSave, onFormClose }) {
     }
 
     const closeForm = () => {
-        onFormClose();
+        onFormClose()
     }
 
     return (
-        <div className="mt-32 m-2 border-2 border-black w-1/2 mx-auto">
+        <div className="md:mt-24 mt-12 border-2 w-4/5 border-black mx-auto md:w-1/2">
             <div className="flex flex-row justify-end">
-                <button className="hover:translate-y-1" onClick={closeForm}>
-                    <img src={xImg} alt="Logo to close de form" className="w-8 h-8"></img>
+                <button
+                    className="hover:translate-y-1 md:bg-red-400"
+                    onClick={closeForm}
+                >
+                    <img
+                        src={xImg}
+                        alt="Logo to close de form"
+                        className="w-8 h-8"
+                    ></img>
                 </button>
             </div>
 
             <form
                 onSubmit={submitHandler}
-                className="flex flex-col text-center"
+                className="flex flex-col text-center flex-wrap border-red-600 border-2"
             >
-                <div className="m-2">
+                <div className="flex flex-col flex-wrap mt-2 p-2 md:flex-nowrap ">
                     <label htmlFor="name">Nome</label>
                     <input
-                        className="mx-2 border-2 rounded-sm border-black"
+                        className="md:mx-2 mx-auto border-2 rounded-sm border-black"
                         type="text"
                         name="name"
                         id="name"
@@ -116,19 +123,21 @@ function PetForm({ onFormSave, onFormClose }) {
                     />
                 </div>
                 <div className="m-2">
-                    <label htmlFor="age">Idade</label>
-                    <input
-                        className="mx-2 border-2 rounded-sm border-black"
-                        type="text"
-                        name="age"
-                        id="age"
-                        minLength={1}
-                        maxLength={2}
-                        value={userInput.petAge}
-                        placeholder="Digite a idade"
-                        onChange={petAgeHandler}
-                        required
-                    />
+                    <div className="p-2 md:flex-row flex flex-col md:justify-center">
+                        <label htmlFor="age">Idade</label>
+                        <input
+                            className="mx-auto md:mx-2 border-2 rounded-sm border-black"
+                            type="text"
+                            name="age"
+                            id="age"
+                            minLength={1}
+                            maxLength={2}
+                            value={userInput.petAge}
+                            placeholder="Digite a idade"
+                            onChange={petAgeHandler}
+                            required
+                        />
+                    </div>
                     <label htmlFor="months">Meses</label>
                     <input
                         className="mx-2 border-2 rounded-sm border-black"
@@ -160,7 +169,7 @@ function PetForm({ onFormSave, onFormClose }) {
                         value={userInput.petDescription}
                     />
                 </div>
-                <div className="m-2">
+                <div className="m-2 flex flex-col md:flex-row md:justify-center">
                     <label htmlFor="responsible">Resposável</label>
                     <input
                         className="mx-2 border-2 rounded-sm border-black"
@@ -173,7 +182,7 @@ function PetForm({ onFormSave, onFormClose }) {
                         required
                     />
                 </div>
-                <div className="m-2">
+                <div className="m-2 flex flex-col md:flex-row md:justify-center">
                     <label htmlFor="phone">Contato</label>
                     <input
                         className="mx-2 border-2 rounded-sm border-black"
@@ -187,7 +196,7 @@ function PetForm({ onFormSave, onFormClose }) {
                     />
                     <small>Format: (21)-9XXXX-XXXX</small>
                 </div>
-                <div className="m-2">
+                <div className="m-2 flex flex-col md:flex-row md:justify-center">
                     <label htmlFor="name">CEP</label>
                     <input
                         className="mx-2 border-2 rounded-sm border-black"
