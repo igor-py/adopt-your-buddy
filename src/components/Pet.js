@@ -7,6 +7,7 @@ function Pet({ name, lstImg, description, contact, age }) {
 
     const handleImgClick = () => {
         setImgPosition((prevState) => {
+            // Se a imagem for a última, volta para a primeira imagem.
             return prevState === lstImg.length - 1 ? 0 : prevState + 1
         })
     }

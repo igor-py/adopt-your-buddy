@@ -1,14 +1,17 @@
-import './App.css';
-import Header from './components/Header';
-import Pet from './components/Pet';
-import PetForm from './components/PetForm';
-import Button from './components/Button';
+import './App.css'
+import Header from './components/Header'
+import Pet from './components/Pet'
+import PetForm from './components/PetForm'
+import Button from './components/Button'
 
-import foto from './images/Nala 1.jpg';
-import foto2 from './images/Nala 2.jpg';
-import foto3 from './images/Nala 3.jpg';
-import foto4 from './images/FotoNalaDeFone.jpg';
-import { useState } from 'react';
+import foto from './images/Nala 1.jpg'
+import foto2 from './images/Nala 2.jpg'
+import foto3 from './images/Nala 3.jpg'
+import foto4 from './images/FotoNalaDeFone.jpg'
+import { useState } from 'react'
+import MapPage from './pages/MapPage'
+import HomePage from './pages/HomePage'
+import { Route } from 'react-router-dom'
 
 const DUMMY_PETS = [
     {
@@ -27,7 +30,7 @@ const DUMMY_PETS = [
     //     age: '9 Meses',
     //     description: 'Um gatinho muito bagunceiro e companheiro',
     // },
-];
+]
 
 function App() {
     const title = 'ADOTE'
@@ -36,41 +39,65 @@ function App() {
         const finalFormData = {
             ...formData,
             id: Math.random().toString(),
-            img: [foto, foto4]
-        };
+            img: [foto, foto4],
+        }
 
         setPetLst((prevLst) => {
-            return [finalFormData, ...prevLst];
-        });
+            return [finalFormData, ...prevLst]
+        })
     }
 
     const handleFormButton = () => {
-        setShowForm(true);
+        setShowForm(true)
     }
 
     const handleFormClose = () => {
-        setShowForm(false);
+        setShowForm(false)
     }
 
-    const [petLst, setPetLst] = useState(DUMMY_PETS);
-    const [showForm, setShowForm] = useState(false);
+    const [petLst, setPetLst] = useState(DUMMY_PETS)
+    const [showForm, setShowForm] = useState(false)
+
+    // Using react Router
+    // domain --> home login page
+    // domain/map
+    // domain/adopter
 
     return (
-        <div className="">
-            <Header title={title} />
-            {petLst.map((pet) => (
-                <Pet
-                    key={pet.id}
-                    name={pet.name}
-                    lstImg={pet.img}
-                    description={pet.description}
-                    age={pet.age}
-                    contact={pet.responsible}
-                />
-            ))}
-            {showForm ? <PetForm onFormSave={savePetFormData} onFormClose={handleFormClose} /> : <Button onButtonClick={handleFormButton}/>}
+        <>
+            <Header title={title}></Header>
+            <Route exact path="/">
+                <HomePage></HomePage>
+            </Route>
             
-        </div>
+            <Route path="/cadastro">
+                {petLst.map((pet) => (
+                    <Pet
+                        key={pet.id}
+                        name={pet.name}
+                        lstImg={pet.img}
+                        description={pet.description}
+                        age={pet.age}
+                        contact={pet.responsible}
+                    />
+                ))}
+                {showForm ? (
+                    <PetForm
+                        onFormSave={savePetFormData}
+                        onFormClose={handleFormClose}
+                    />
+                ) : (
+                    <Button
+                        onButtonClick={handleFormButton}
+                        label="Cadastrar novo Pet"
+                    />
+                )}
+            </Route>
+
+            <Route path="/mapa">
+                <MapPage></MapPage>
+            </Route>
+        </>
     )
 }
 
