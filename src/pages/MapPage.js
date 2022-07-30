@@ -1,111 +1,124 @@
 /*
 Lembrar que terá um input de raio também
 */
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Button from '../components/Button'
 import Header from '../components/Header'
-import {
-    MapContainer,
-    TileLayer,
-    useMap,
-    Marker,
-    Popup,
-    useMapEvents,
-    Circle,
-} from 'react-leaflet'
+import * as L from 'leaflet'
+import petDatabase from '../data/database'
+import petCatIconSvg from '../images/icons/cat-svgrepo-com.svg'
+import petDogIconSvg from '../images/icons/dog-svgrepo-com.svg'
+import petCatDogIconSvg from '../images/icons/cat-dog.svg'
 
 function MapPage({}) {
-    function LocationMarker() {
-        console.log('Chamou location marker')
-        const [position, setPosition] = useState(null)
-        console.log('-->', position)
-        const map = useMapEvents({
-            click() {
-                map.locate()
-            },
-            locationfound(e) {
-                setPosition(e.latlng)
-                map.flyTo(e.latlng, map.getZoom())
-            },
+    const [petDatabaseCopy, setPetDatabaseCopy] = useState(petDatabase)
+    // Utilizar esse array aqui para centralizar o mapa, incialmente
+    const center = [-22.86, -43.09]
+    var map
+    var catIcon
+    var dogIcon
+    var catAndDogIcon
+
+    // Use of componentDidMount for functions
+    useEffect(() => {
+        handleMap()
+    }, [])
+
+    const handleMap = () => {
+        catIcon = L.icon({
+            iconUrl: petCatIconSvg,
+            iconSize: [38, 95],
+            iconAnchor: [22, 94],
+            popupAnchor: [-3, -76],
         })
 
-        return position === null ? null : (
-            <Marker position={position}>
-                <Popup>You are here</Popup>
-            </Marker>
+        dogIcon = L.icon({
+            iconUrl: petDogIconSvg,
+            iconSize: [38, 95],
+            iconAnchor: [22, 94],
+            popupAnchor: [-3, -76],
+        })
+
+        catAndDogIcon = L.icon({
+            iconUrl: petCatDogIconSvg,
+            iconSize: [38, 95],
+            iconAnchor: [22, 94],
+            popupAnchor: [-3, -76],
+        })
+
+        map = L.map('map')
+        const layer = L.tileLayer(
+            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap',
+            }
+        )
+        map.addLayer(layer)
+
+        map.setView(center, 16)
+        map.locate({ setView: true, maxZoom: 16 }).on(
+            'locationfound',
+            setDataForMap
         )
     }
 
-    const handleProcessCEP = (cep) => {
-        console.log('CLicou botão cep ', cep)
-        LocationMarker()
-    }
-
-    const cepHandler = (event) => {
-        console.log('onChange ', event.target.value)
-        setCep((prevState) => {
-            console.log(prevState)
-            return event.target.value
+    function setDataForMap() {
+        petDatabaseCopy.forEach((data) => {
+            const iconToShow =
+                data.breed == 'both'
+                    ? catAndDogIcon
+                    : data.breed == 'cat'
+                    ? catIcon
+                    : dogIcon
+            const marker = L.marker(data.local, {
+                icon: iconToShow,
+            }).addTo(map)
+            const msg = `Responsável: ${data.responsible}`
+            marker.bindPopup(msg)
         })
     }
 
-    const [cep, setCep] = useState('')
-    const centerObj = {
-        lat: -22.87,
-        lng: -43.09,
-    }
-    const center = [51.505, -0.09]
-    const fillBlueOptions = { fillColor: 'blue' }
-    const radius = 400
-
-    let showCep = false
-
     return (
         <>
-            <div className="leafletContainer">
-                <MapContainer center={center} zoom={15} scrollWheelZoom={false}>
-                    <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    <LocationMarker />
-                    <Marker position={[centerObj.lat, centerObj.lng]}>
-                        <Popup>Tem um Pet aqui</Popup>
-                    </Marker>
-                    <Circle
-                        center={center}
-                        pathOptions={fillBlueOptions}
-                        radius={radius}
-                    />
-                    {/* <Marker position={[-22.3, -43.1]}>
-                        <Popup>Tem um Pet aqui 2</Popup>
-                    </Marker> */}
-                </MapContainer>
-            </div>
-
-            {showCep ? (
-                <>
-                    <div className="m-2 flex flex-col md:flex-row md:justify-center">
-                        <label htmlFor="name">CEP</label>
-                        <input
-                            className="mx-2 border-2 rounded-sm border-blue"
-                            type="text"
-                            name="cep"
-                            id="cep"
-                            placeholder="Digite o CEP"
-                            value={cep}
-                            onChange={cepHandler}
-                            required
-                        />
+            {/* <div className='text-stone-800 text-center py-4'>Mapa de Adoção</div> */}
+            <div id="map" className="border-2 bg-slate-50"></div>
+            <div
+                className="mx-auto p-2 border-2 flex flex-col justify-center content-between 
+                            gap-1.5 w-1/4 my-8"
+            >
+                <div className="mx-auto font-bold underline">Legenda</div>
+                <div className="flex flex-row content-center">
+                    <img
+                        className="w-12 h-12"
+                        src={petCatIconSvg}
+                        alt="Cat Logo"
+                    ></img>
+                    <div className="my-auto mx-2 font-medium text-blue-600">
+                        Locais que contém apenas Gatos
                     </div>
-                    <Button
-                        onButtonClick={handleProcessCEP}
-                        label="Enviar CEP"
-                    />
-                </>
-            ) : (
-                <></>
-            )}
+                </div>
+                <div className="flex flex-row content-center">
+                    <img
+                        className="w-12 h-12"
+                        src={petDogIconSvg}
+                        alt="Cat Logo"
+                    ></img>
+                    <div className="my-auto mx-2 font-medium text-green-600">
+                        Locais que contém apenas Cachorros
+                    </div>
+                </div>
+                <div className="flex flex-row content-center">
+                    <img
+                        className="w-12 h-12"
+                        src={petCatDogIconSvg}
+                        alt="Cat Logo"
+                    ></img>
+                    <div className="my-auto mx-2 font-medium text-yellow-600">
+                        Locais que contém os dois
+                    </div>
+                </div>
+            </div>
         </>
     )
 }

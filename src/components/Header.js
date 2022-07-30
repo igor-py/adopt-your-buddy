@@ -3,9 +3,9 @@ import {Link} from 'react-router-dom'
 
 function Header({ title }) {
     return (
-        <div className="bg-header-color ">
-            <div className="mx-auto flex flex-row flew-wrap justify-between p-2">
-                <div>
+        <div className="bg-header-color">
+            <div className="flex flex-row flew-wrap justify-between p-2 content-center">
+                <div className='my-auto'>
                     <Link to="/home" className="hover:text-teal-900 my-auto">Home</Link>
                     <Link to="/mapa" className="hover:text-teal-900 my-auto mx-2">Map</Link>
                     <Link to="/cadastro" className="hover:text-teal-900 my-auto mx-2">Cadastro</Link>
