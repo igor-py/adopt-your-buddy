@@ -9,15 +9,18 @@ import petDatabase from '../data/database'
 import petCatIconSvg from '../images/icons/cat-svgrepo-com.svg'
 import petDogIconSvg from '../images/icons/dog-svgrepo-com.svg'
 import petCatDogIconSvg from '../images/icons/cat-dog.svg'
+import loadingIcon from '../images/icons/loading-svgrepo-com.svg'
 
 function MapPage({}) {
     const [petDatabaseCopy, setPetDatabaseCopy] = useState(petDatabase)
+    const [loadingCss, setLoadingCss] = useState('mx-auto mt-2 animate-spin h-16 w-16')
     // Utilizar esse array aqui para centralizar o mapa, incialmente
     const center = [-22.86, -43.09]
     var map
     var catIcon
     var dogIcon
     var catAndDogIcon
+    const loadingCssArray = loadingCss.split(' ')
 
     // Use of componentDidMount for functions
     useEffect(() => {
@@ -61,6 +64,11 @@ function MapPage({}) {
             'locationfound',
             setDataForMap
         )
+
+        setTimeout(() => {
+            loadingCssArray.push('hidden')
+            setLoadingCss(loadingCssArray.join(' '))
+        }, 2500)
     }
 
     function setDataForMap() {
@@ -73,7 +81,9 @@ function MapPage({}) {
                     : dogIcon
             const marker = L.marker(data.local, {
                 icon: iconToShow,
-            }).addTo(map)
+            }).addTo(map).on('click', (e) => {
+                console.log('Clicou ', e.target._popup)
+            })
             const msg = `Responsável: ${data.responsible}`
             marker.bindPopup(msg)
         })
@@ -81,7 +91,10 @@ function MapPage({}) {
 
     return (
         <>
-            {/* <div className='text-stone-800 text-center py-4'>Mapa de Adoção</div> */}
+            
+
+            <img className={loadingCss} src={loadingIcon} alt="Cat Logo"></img>
+
             <div id="map" className="border-2 bg-slate-50"></div>
             <div
                 className="mx-auto p-2 border-2 flex flex-col justify-center content-between 

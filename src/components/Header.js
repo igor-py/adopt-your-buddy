@@ -11,7 +11,7 @@ function Header({ title }) {
                     <Link to="/cadastro" className="hover:text-teal-900 my-auto mx-2">Cadastro</Link>
                 </div>
 
-                <div className="w-1/4 m-2 border-2 border-indigo-600 rounded-md shadow-lg shadow-indigo-500/50">
+                <div className="w-1/4 my-2 mr-20 border-2 border-indigo-600 rounded-md shadow-lg shadow-indigo-500/50">
                     <h1 className="text-4xl text-black text-center p-1 m-2">
                         {title}
                     </h1>
