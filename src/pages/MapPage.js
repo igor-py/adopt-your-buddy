@@ -2,9 +2,11 @@
 Lembrar que terá um input de raio também
 */
 import { useState, useEffect } from 'react'
-import Button from '../components/Button'
-import Header from '../components/Header'
+import { useHistory, Prompt } from 'react-router-dom'
 import * as L from 'leaflet'
+
+import Button from '../components/Button'
+
 import petDatabase from '../data/database'
 import petCatIconSvg from '../images/icons/cat-svgrepo-com.svg'
 import petDogIconSvg from '../images/icons/dog-svgrepo-com.svg'
@@ -13,7 +15,13 @@ import loadingIcon from '../images/icons/loading-svgrepo-com.svg'
 
 function MapPage({}) {
     const [petDatabaseCopy, setPetDatabaseCopy] = useState(petDatabase)
-    const [loadingCss, setLoadingCss] = useState('mx-auto mt-2 animate-spin h-16 w-16')
+    const [loadingCss, setLoadingCss] = useState(
+        'mx-auto mt-2 animate-spin h-16 w-16'
+    )
+    const [clickedMarker, setClickedMarker] = useState(false)
+    const [msgToShow, setMsgToShow] = useState('')
+    const history = useHistory()
+
     // Utilizar esse array aqui para centralizar o mapa, incialmente
     const center = [-22.86, -43.09]
     var map
@@ -81,17 +89,39 @@ function MapPage({}) {
                     : dogIcon
             const marker = L.marker(data.local, {
                 icon: iconToShow,
-            }).addTo(map).on('click', (e) => {
-                console.log('Clicou ', e.target._popup)
+                title: data.id,
             })
-            const msg = `Responsável: ${data.responsible}`
+                .addTo(map)
+                .on('click', (e) => {
+                    const idToOpen = e.target.options.title
+                    console.log('Send to Page ', idToOpen)
+                    setClickedMarker(true)
+                    setMsgToShow(
+                        `----------------------------------
+                        Responsável: ${data.responsible}
+                        Número de pets: ${data.pets.length}
+                        -----------------------------------
+                        Deseja abrir a página de Pets para esse local?`
+                    )
+
+                    // Maneira de mandar para a pagina ja passando o ID a ser utilizado
+                    history.push('/pets/'+idToOpen)
+                })
+            const msg = `Responsável: ${data.responsible} - ${data.id}`
             marker.bindPopup(msg)
         })
     }
 
     return (
         <>
-            
+            <Prompt
+                when={clickedMarker}
+                message={(location, action) => {
+                    console.log('Action --> ', action)
+                    console.log('location --> ', location)
+                    return msgToShow
+                }}
+            />
 
             <img className={loadingCss} src={loadingIcon} alt="Cat Logo"></img>
 

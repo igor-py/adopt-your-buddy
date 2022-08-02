@@ -1,9 +1,11 @@
 import { useState } from 'react'
-import TestChildren from './TestChildren'
+import {useParams} from 'react-router-dom'
 
 function Pet({ name, lstImg, description, contact, age }) {
     const [imgPosition, setImgPosition] = useState(0)
     const img = lstImg[imgPosition]
+    // Get acces to the URLs params
+    const params = useParams();
 
     const handleImgClick = () => {
         setImgPosition((prevState) => {
@@ -14,6 +16,7 @@ function Pet({ name, lstImg, description, contact, age }) {
 
     return (
         <div className="w-5/6 mx-auto m-2 py-4 border-2 rounded-md border-black flex flex-row flex-nowrap justify-around">
+            <h1>{params.ownerId}</h1>
             <div className="rounded-md shadow-md w-1/2 m-2 bg-stone-500">
                 <img
                     className="w-auto h-[32rem] mx-auto"

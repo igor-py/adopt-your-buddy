@@ -8,10 +8,13 @@ import foto from './images/Nala 1.jpg'
 import foto2 from './images/Nala 2.jpg'
 import foto3 from './images/Nala 3.jpg'
 import foto4 from './images/FotoNalaDeFone.jpg'
+
+import { Redirect, Route } from 'react-router-dom'
 import { useState } from 'react'
+
+import Catalog from './pages/Catalog'
 import MapPage from './pages/MapPage'
 import HomePage from './pages/HomePage'
-import { Route } from 'react-router-dom'
 
 const DUMMY_PETS = [
     {
@@ -67,9 +70,13 @@ function App() {
         <>
             <Header title={title}></Header>
             <Route exact path="/">
+                <Redirect to='/home'/>
+            </Route>
+
+            <Route exact path="/home">
                 <HomePage></HomePage>
             </Route>
-            
+
             <Route path="/cadastro">
                 {petLst.map((pet) => (
                     <Pet
@@ -90,12 +97,26 @@ function App() {
                     <Button
                         onButtonClick={handleFormButton}
                         label="Cadastrar novo Pet"
+                        color='bg-[#07B6D4]'
                     />
                 )}
             </Route>
 
             <Route path="/mapa">
                 <MapPage></MapPage>
+            </Route>
+
+            <Route path="/pets/:ownerId">
+                {petLst.map((pet) => (
+                    <Pet
+                        key={pet.id}
+                        name={pet.name}
+                        lstImg={pet.img}
+                        description={pet.description}
+                        age={pet.age}
+                        contact={pet.responsible}
+                    />
+                ))}
             </Route>
         </>
     )

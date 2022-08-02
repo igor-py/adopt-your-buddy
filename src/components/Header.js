@@ -1,14 +1,15 @@
 import catImg from '../images/cat-alt-1.svg'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 function Header({ title }) {
     return (
         <div className="bg-header-color">
             <div className="flex flex-row flew-wrap justify-between p-2 content-center">
                 <div className='my-auto'>
-                    <Link to="/home" className="hover:text-teal-900 my-auto">Home</Link>
-                    <Link to="/mapa" className="hover:text-teal-900 my-auto mx-2">Map</Link>
-                    <Link to="/cadastro" className="hover:text-teal-900 my-auto mx-2">Cadastro</Link>
+                    <NavLink to="/home" activeClassName='text-green-700 underline underline-offset-4' className="hover:text-teal-900 my-auto">Home</NavLink>
+                    <NavLink to="/mapa" activeClassName='text-green-700 underline underline-offset-4' className="hover:text-teal-900 my-auto mx-2">Map</NavLink>
+                    <NavLink to="/cadastro" activeClassName='text-green-700 underline underline-offset-4' className="hover:text-teal-900 my-auto mx-2">Cadastro</NavLink>
+                    <NavLink to="/pets" activeClassName='text-green-700 underline underline-offset-4' className="hover:text-teal-900 my-auto mx-2">Pets</NavLink>
                 </div>
 
                 <div className="w-1/4 my-2 mr-20 border-2 border-indigo-600 rounded-md shadow-lg shadow-indigo-500/50">
