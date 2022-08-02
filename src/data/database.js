@@ -8,18 +8,22 @@ const petDatabase = [
         breed: 'both',
         pets: [
             {
+                petId: 0,
                 type: 'cat',
                 description: 'Uma gatinha muito amorosa',
                 name: 'Nala',
                 age: 9,
                 isMonth: true,
+                lstOfImg: ['Nala 1.jpg', 'Nala 2.jpg', 'Nala 3.jpg', 'FotoNalaDeFone.jpg']
             },
             {
+                petId: 1,
                 type: 'dog',
                 description: 'Um cachorrinho muito brincalhão',
                 name: 'Tobias',
                 age: 2,
                 isMonth: false,
+                lstOfImg: ['Nala 1.jpg', 'Nala 2.jpg', 'Nala 3.jpg', 'FotoNalaDeFone.jpg']
             },
         ],
     },
@@ -30,11 +34,13 @@ const petDatabase = [
         breed: 'cat',
         pets: [
             {
+                petId: 0,
                 type: 'cat',
                 description: 'Um gato muito esperto',
                 name: 'Simba',
                 age: 7,
                 isMonth: true,
+                lstOfImg: ['Nala 1.jpg', 'Nala 2.jpg', 'Nala 3.jpg', 'FotoNalaDeFone.jpg']
             },
         ],
     },
@@ -45,11 +51,13 @@ const petDatabase = [
         breed: 'dog',
         pets: [
             {
+                petId: 0,
                 type: 'dog',
                 description: 'uma amiguinha para todos os momentos',
                 name: 'Belinha',
                 age: 3,
                 isMonth: false,
+                lstOfImg: ['Nala 1.jpg', 'Nala 2.jpg', 'Nala 3.jpg', 'FotoNalaDeFone.jpg']
             },
         ],
     },
@@ -60,11 +68,13 @@ const petDatabase = [
         local: [-22.880708371774226, -43.10498511672377],
         pets: [
             {
+                petId: 0,
                 type: 'dog',
                 description: 'uma amiguinha para todos os momentos',
                 name: 'Belinha',
                 age: 3,
                 isMonth: false,
+                lstOfImg: ['Nala 1.jpg', 'Nala 2.jpg', 'Nala 3.jpg', 'FotoNalaDeFone.jpg']
             },
         ],
     },
@@ -75,11 +85,13 @@ const petDatabase = [
         breed: 'cat',
         pets: [
             {
+                petId: 0,
                 type: 'cat',
                 description: 'uma amiguinha para todos os momentos',
                 name: 'Belinha',
                 age: 3,
                 isMonth: false,
+                lstOfImg: ['Nala 1.jpg', 'Nala 2.jpg', 'Nala 3.jpg', 'FotoNalaDeFone.jpg']
             },
         ],
     },
@@ -90,11 +102,13 @@ const petDatabase = [
         breed: 'dog',
         pets: [
             {
+                petId: 0,
                 type: 'dog',
                 description: 'uma amiguinha para todos os momentos',
                 name: 'Belinha',
                 age: 3,
                 isMonth: false,
+                lstOfImg: ['Nala 1.jpg', 'Nala 2.jpg', 'Nala 3.jpg', 'FotoNalaDeFone.jpg']
             },
         ],
     },
@@ -105,11 +119,13 @@ const petDatabase = [
         breed: 'dog',
         pets: [
             {
+                petId: 0,
                 type: 'dog',
                 description: 'uma amiguinha para todos os momentos',
                 name: 'Belinha',
                 age: 3,
                 isMonth: false,
+                lstOfImg: ['Nala 1.jpg', 'Nala 2.jpg', 'Nala 3.jpg', 'FotoNalaDeFone.jpg']
             },
         ],
     },
@@ -120,11 +136,13 @@ const petDatabase = [
         breed: 'dog',
         pets: [
             {
+                petId: 0,
                 type: 'dog',
                 description: 'uma amiguinha para todos os momentos',
                 name: 'Belinha',
                 age: 3,
                 isMonth: false,
+                lstOfImg: ['Nala 1.jpg', 'Nala 2.jpg', 'Nala 3.jpg', 'FotoNalaDeFone.jpg']
             },
         ],
     },
@@ -135,11 +153,13 @@ const petDatabase = [
         breed: 'cat',
         pets: [
             {
+                petId: 0,
                 type: 'cat',
                 description: 'uma amiguinha para todos os momentos',
                 name: 'Belinha',
                 age: 3,
                 isMonth: false,
+                lstOfImg: ['Nala 1.jpg', 'Nala 2.jpg', 'Nala 3.jpg', 'FotoNalaDeFone.jpg']
             },
         ],
     },
@@ -150,11 +170,13 @@ const petDatabase = [
         breed: 'cat',
         pets: [
             {
+                petId: 0,
                 type: 'cat',
                 description: 'uma amiguinha para todos os momentos',
                 name: 'Belinha',
                 age: 3,
                 isMonth: false,
+                lstOfImg: ['Nala 1.jpg', 'Nala 2.jpg', 'Nala 3.jpg', 'FotoNalaDeFone.jpg']
             },
         ],
     },
@@ -165,18 +187,22 @@ const petDatabase = [
         breed: 'both',
         pets: [
             {
+                petId: 0,
                 type: 'dog',
                 description: 'uma amiguinha para todos os momentos',
                 name: 'Belinha',
                 age: 3,
                 isMonth: false,
+                lstOfImg: ['Nala 1.jpg', 'Nala 2.jpg', 'Nala 3.jpg', 'FotoNalaDeFone.jpg']
             },
             {
+                petId: 1,
                 type: 'cat',
                 description: 'uma amiguinha para todos os momentos',
                 name: 'Belinha',
                 age: 3,
                 isMonth: false,
+                lstOfImg: ['Nala 1.jpg', 'Nala 2.jpg', 'Nala 3.jpg', 'FotoNalaDeFone.jpg']
             }
         ],
     },
@@ -187,11 +213,13 @@ const petDatabase = [
         breed: 'cat',
         pets: [
             {
+                petId: 0,
                 type: 'cat',
                 description: 'uma amiguinha para todos os momentos',
                 name: 'Belinha',
                 age: 3,
                 isMonth: false,
+                lstOfImg: ['Nala 1.jpg', 'Nala 2.jpg', 'Nala 3.jpg', 'FotoNalaDeFone.jpg']
             },
         ],
     },
@@ -202,11 +230,13 @@ const petDatabase = [
         breed: 'cat',
         pets: [
             {
+                petId: 0,
                 type: 'cat',
                 description: 'uma amiguinha para todos os momentos',
                 name: 'Belinha',
                 age: 3,
                 isMonth: false,
+                lstOfImg: ['Nala 1.jpg', 'Nala 2.jpg', 'Nala 3.jpg', 'FotoNalaDeFone.jpg']
             },
         ],
     },
@@ -217,18 +247,22 @@ const petDatabase = [
         breed: 'both',
         pets: [
             {
+                petId: 0,
                 type: 'dog',
                 description: 'uma amiguinha para todos os momentos',
                 name: 'Belinha',
                 age: 3,
                 isMonth: false,
+                lstOfImg: ['Nala 1.jpg', 'Nala 2.jpg', 'Nala 3.jpg', 'FotoNalaDeFone.jpg']
             },
             {
+                petId: 1,
                 type: 'cat',
                 description: 'uma amiguinha para todos os momentos',
                 name: 'Bela',
                 age: 2,
                 isMonth: true,
+                lstOfImg: ['Nala 1.jpg', 'Nala 2.jpg', 'Nala 3.jpg', 'FotoNalaDeFone.jpg']
             }
         ],
     }
