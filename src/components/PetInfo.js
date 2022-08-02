@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import useImage from '../utils/useImage'
+import Button from './Button'
 
 const PetInfo = ({ key, name, lstImg, description, age, contact, isMonth }) => {
     const [imgPosition, setImgPosition] = useState(0)
@@ -8,11 +9,11 @@ const PetInfo = ({ key, name, lstImg, description, age, contact, isMonth }) => {
     const { loading, error, image } = useImage(img)
 
     useEffect(() => {
-        if(lstImg) {
+        if (lstImg) {
             loadImage(lstImg[imgPosition])
         }
     })
-    
+
     const handleImgClick = () => {
         setImgPosition((prevState) => {
             // Se a imagem for a última, volta para a primeira imagem.
@@ -21,33 +22,65 @@ const PetInfo = ({ key, name, lstImg, description, age, contact, isMonth }) => {
     }
 
     return (
-        <div className="w-5/6 mx-auto m-2 py-4 border-2 rounded-md border-black flex flex-row flex-nowrap justify-around">
-            <div className="rounded-md shadow-md w-1/2 m-2 bg-stone-500">
+        <div
+            className="sm:w-5/6 mx-auto m-2 py-4 sm:border-2 rounded-md border-black flex 
+                        flex-col justify-center content-center bg-purple-100"
+        >
+            <div
+                className="sm:border-2 border-zinc-300 rounded-md shadow-md w-9/12 m-2 bg-blue-200 
+                            flex flex-col justify-evenly content-center mx-auto"
+            >
+                <h1 className="mt-2 text-center font-serif font-semibold">
+                    Nome
+                </h1>
+                <div
+                    className="sm:w-1/2 mx-auto text-lg font-extralight font-serif text-center 
+                            text-slate-900 m-2 p-4 border-2 border-black"
+                >
+                    {name}
+                </div>
+                <h1 className="mt-2 text-center font-serif font-semibold">
+                    Responsável
+                </h1>
+                <div
+                    className="sm:w-1/3 mx-auto text-lg font-light font-serif text-center 
+                    m-2 p-2 border-2 border-black text-slate-900"
+                >
+                    {contact}
+                </div>
+                <h1 className="mt-2 text-center font-serif font-semibold">
+                    Idade
+                </h1>
+                <div
+                    className="sm:w-1/5 mx-auto text-lg font-light font-serif text-center 
+                            text-slate-900 m-2 p-2 border-2 border-black"
+                >
+                    {age} {isMonth ? 'Meses' : 'Anos'}
+                </div>
+
+                <h1 className="mt-2 text-center font-serif font-semibold">
+                    Descrição
+                </h1>
+                <div
+                    className="sm:w-5/6 sm:mx-auto text-lg font-light font-serif text-justify 
+                            text-slate-900 m-2 p-4 border-2 border-black min-h-max indent-2"
+                >
+                    {description}
+                </div>
+            </div>
+            <div className="sm:rounded-md sm:shadow-md sm:w-1/2 m-2 mx-auto sm:bg-stone-400 p-2 sm:p-0">
                 <img
-                    className="w-auto h-[32rem] mx-auto"
+                    className="w-9/12 sm:h-[32rem] h-1/2 mx-auto "
                     src={image}
                     alt="Cat with a headphone"
                 ></img>
             </div>
-            <div className="border-2 border-black rounded-md shadow-md w-1/2 m-2 bg-blue-200 flex flex-col justify-evenly content-center">
-                <div className="w-5/6 h-1/4 mx-auto text-lg font-light font-serif text-center text-lime-700 m-2 p-4 border-2 border-black">
-                    {description}
-                </div>
-                <div className="w-1/2 mx-auto text-lg font-light font-serif text-center text-lime-700 m-2 p-4 border-2 border-black">
-                    {name}
-                </div>
-                <div className="w-1/2 mx-auto text-lg font-light font-serif text-center text-lime-700 m-2 p-4 border-2 border-black">
-                    Resposável: {contact}
-                </div>
-                <div className="w-1/2 mx-auto text-lg font-light font-serif text-center text-lime-700 m-2 p-4 border-2 border-black">
-                    Idade: {age}
-                </div>
-            </div>
             <button
-                className="my-auto m-2 p-4 hover:bg-black"
+                className="my-auto mx-auto m-2 p-4 border-2 bg-teal-500/75 
+                    hover:scale-105 rounded-md w-1/4"
                 onClick={handleImgClick}
             >
-                Click Me
+                Mudar de Foto
             </button>
         </div>
     )

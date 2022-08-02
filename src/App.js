@@ -78,16 +78,6 @@ function App() {
             </Route>
 
             <Route path="/cadastro">
-                {petLst.map((pet) => (
-                    <Pet
-                        key={pet.id}
-                        name={pet.name}
-                        lstImg={pet.img}
-                        description={pet.description}
-                        age={pet.age}
-                        contact={pet.responsible}
-                    />
-                ))}
                 {showForm ? (
                     <PetForm
                         onFormSave={savePetFormData}

@@ -12,12 +12,12 @@ function Header({ title }) {
                     <NavLink to="/pets" activeClassName='text-green-700 underline underline-offset-4' className="hover:text-teal-900 my-auto mx-2">Pets</NavLink>
                 </div>
 
-                <div className="w-1/4 my-2 mr-20 border-2 border-indigo-600 rounded-md shadow-lg shadow-indigo-500/50">
-                    <h1 className="text-4xl text-black text-center p-1 m-2">
+                <div className="sm:w-1/4 my-2 sm:mr-20 border-2 border-indigo-600 rounded-md shadow-lg shadow-indigo-500/50">
+                    <h1 className="sm:text-4xl text-2xl text-black text-center p-2 sm:m-2">
                         {title}
                     </h1>
                 </div>
-                <div className="border-2 rounded-full border-[#343633]">
+                <div className="border-2 rounded-full border-[#343633] hidden sm:block">
                     <button className="hover:translate-x-1 p-4">
                         <img
                             src={catImg}

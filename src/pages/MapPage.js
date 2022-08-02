@@ -128,12 +128,12 @@ function MapPage({}) {
             <div id="map" className="border-2 bg-slate-50"></div>
             <div
                 className="mx-auto p-2 border-2 flex flex-col justify-center content-between 
-                            gap-1.5 w-1/4 my-8"
+                            gap-1.5 sm:w-1/4 w-7/12 my-8"
             >
                 <div className="mx-auto font-bold underline">Legenda</div>
-                <div className="flex flex-row content-center">
+                <div className="flex content-center sm:flex-row flex-col">
                     <img
-                        className="w-12 h-12"
+                        className="w-12 h-12 self-center sm:self-auto"
                         src={petCatIconSvg}
                         alt="Cat Logo"
                     ></img>
@@ -141,19 +141,19 @@ function MapPage({}) {
                         Locais que contém apenas Gatos
                     </div>
                 </div>
-                <div className="flex flex-row content-center">
+                <div className="flex sm:flex-row flex-col content-center">
                     <img
-                        className="w-12 h-12"
+                        className="w-12 h-12 self-center sm:self-auto"
                         src={petDogIconSvg}
                         alt="Cat Logo"
                     ></img>
-                    <div className="my-auto mx-2 font-medium text-green-600">
+                    <div className="my-auto sm:mx-2 font-medium text-green-600">
                         Locais que contém apenas Cachorros
                     </div>
                 </div>
-                <div className="flex flex-row content-center">
+                <div className="flex content-center sm:flex-row flex-col">
                     <img
-                        className="w-12 h-12"
+                        className="w-12 h-12 self-center sm:self-auto"
                         src={petCatDogIconSvg}
                         alt="Cat Logo"
                     ></img>
