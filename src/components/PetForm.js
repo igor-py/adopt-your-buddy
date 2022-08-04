@@ -1,8 +1,9 @@
 import Input from './InputUtil'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import xImg from '../images/x.svg'
 
 function PetForm({ onFormSave, onFormClose }) {
+    const [responsiblePosition, setResponsiblePosition] = useState([])
     const [userInput, setUserInput] = useState({
         petName: '',
         petAge: '',
@@ -11,6 +12,31 @@ function PetForm({ onFormSave, onFormClose }) {
         petPhone: '',
         petCep: '',
     })
+
+    useEffect(() => {
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    console.log('Latitude is :', position.coords.latitude)
+                    console.log('Longitude is :', position.coords.longitude)
+                    setResponsiblePosition([
+                        position.coords.latitude,
+                        position.coords.longitude,
+                    ])
+                },
+                (error) => {
+                    console.log(
+                        'Error Code = ' + error.code + ' - ' + error.message
+                    )
+                    if (error.code === 1) {
+                        alert('Por Favor - Habilite o acesso à localização')
+                    }
+                }
+            )
+        } else {
+            alert('Navegador não suportado')
+        }
+    }, [])
 
     // If your state update depends on a previous value always use this kind of function
     const petNameHandler = (event) => {
@@ -69,12 +95,12 @@ function PetForm({ onFormSave, onFormClose }) {
             description: event.target[4].value,
             responsible: event.target[5].value,
             phone: event.target[6].value,
-            cep: event.target[7].value,
+            position: responsiblePosition,
         }
 
         onFormSave(petData)
 
-        console.log('petData', petData)
+        console.log('petData', petData, responsiblePosition)
         // Tem que limpar os valores antigos do campos.
         setUserInput({
             petName: '',
@@ -82,7 +108,6 @@ function PetForm({ onFormSave, onFormClose }) {
             petDescription: '',
             petResponsible: '',
             petPhone: '',
-            petCep: '',
         })
     }
 
@@ -195,19 +220,6 @@ function PetForm({ onFormSave, onFormClose }) {
                         required
                     />
                     <small>Format: (21)-9XXXX-XXXX</small>
-                </div>
-                <div className="m-2 flex flex-col md:flex-row md:justify-center">
-                    <label htmlFor="name">CEP</label>
-                    <input
-                        className="mx-2 border-2 rounded-sm border-black"
-                        type="text"
-                        name="cep"
-                        id="cep"
-                        placeholder="Digite o CEP do local que se encontra o Pet"
-                        value={userInput.petCep}
-                        onChange={petCepHandler}
-                        required
-                    />
                 </div>
 
                 <button className="m-2 p-2 border-2 border-black mx-auto">

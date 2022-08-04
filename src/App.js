@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Pet from './components/Pet'
 import PetForm from './components/PetForm'
 import Button from './components/Button'
+import Footer from './components/Footer'
 
 import foto from './images/Nala 1.jpg'
 import foto2 from './images/Nala 2.jpg'
@@ -39,6 +40,7 @@ function App() {
     const title = 'ADOTE'
 
     const savePetFormData = (formData) => {
+        console.log('Veio savePetFormData ', formData)
         const finalFormData = {
             ...formData,
             id: Math.random().toString(),
@@ -70,11 +72,12 @@ function App() {
         <>
             <Header title={title}></Header>
             <Route exact path="/">
-                <Redirect to='/home'/>
+                <Redirect to="/home" />
             </Route>
 
             <Route exact path="/home">
                 <HomePage></HomePage>
+                <Footer />
             </Route>
 
             <Route path="/cadastro">
@@ -87,13 +90,15 @@ function App() {
                     <Button
                         onButtonClick={handleFormButton}
                         label="Cadastrar novo Pet"
-                        color='bg-[#07B6D4]'
+                        color="bg-[#07B6D4]"
                     />
                 )}
+                <Footer />
             </Route>
 
             <Route path="/mapa">
                 <MapPage></MapPage>
+                <Footer />
             </Route>
 
             <Route path="/pets/:ownerId">
@@ -107,7 +112,9 @@ function App() {
                         contact={pet.responsible}
                     />
                 ))}
+                <Footer />
             </Route>
+            
         </>
     )
 }
