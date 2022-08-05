@@ -107,8 +107,8 @@ function MapPage({}) {
                     // Maneira de mandar para a pagina ja passando o ID a ser utilizado
                     history.push('/pets/'+idToOpen)
                 })
-            const msg = `Responsável: ${data.responsible} - ${data.id}`
-            marker.bindPopup(msg)
+            // const msg = `Responsável: ${data.responsible} - ${data.id}`
+            // marker.bindPopup(msg)
         })
     }
 

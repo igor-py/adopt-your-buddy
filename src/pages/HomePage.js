@@ -1,4 +1,5 @@
-import dogPhoto from '../images/cute-dog-headshot.jpeg'
+import dogPhoto from '../images/3.svg'
+import catPhoto from '../images/2.svg'
 import photoWomanWithPet from '../images/foto-pet-home.jpeg'
 
 function HomePage() {
@@ -34,6 +35,24 @@ function HomePage() {
                         more recently with desktop publishing software like
                         Aldus PageMaker including versions of Lorem Ipsum.
                     </p>
+                </div>
+                <div className='flex flex-col sm:flex-row justify-center gap-2 sm:gap-8'>
+                    <div className='p-4 m-2'>
+                        <img
+                            className="mx-auto hover:scale-105"
+                            src={catPhoto}
+                            alt="Cat with a headphone"
+                        ></img>
+                        <div className='bg-emerald-400 sm:w-1/2 w-7/12 mx-auto text-center font-medium text-2xl animate-pulse'>Quer Adotar?</div>
+                    </div>
+                    <div className='border p-4 m-2'>
+                        <img
+                            className="mx-auto hover:scale-105"
+                            src={dogPhoto}
+                            alt="Cat with a headphone"
+                        ></img>
+                        <div className='bg-rose-400 sm:w-1/2 w-7/12 mx-auto text-center font-medium text-2xl animate-pulse'>Quer Doar?</div>
+                    </div>
                 </div>
             </div>
         </>
