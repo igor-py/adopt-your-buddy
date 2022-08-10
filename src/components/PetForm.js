@@ -1,5 +1,5 @@
 import Input from './InputUtil'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import xImg from '../images/x.svg'
 
 function PetForm({ onFormSave, onFormClose }) {
@@ -12,6 +12,8 @@ function PetForm({ onFormSave, onFormClose }) {
         petPhone: '',
         petCep: '',
     })
+    const [photo, setPhoto] = useState('')
+    const fileInput = useRef(null)
 
     useEffect(() => {
         if ('geolocation' in navigator) {
@@ -75,12 +77,20 @@ function PetForm({ onFormSave, onFormClose }) {
         })
     }
 
+    const handlePhoto = (event) => {
+        const files = Object.values(event.target.files)
+        files.forEach((file) => {
+            console.log('Arquivo aqui ', file)
+        })
+    }
+
     // Ainda falta colocar o input para as fotos dos pets.
     const submitHandler = (event) => {
         event.preventDefault()
 
         // Coleta os valores de input do campo Name
         console.log('Event', event)
+        console.log('Teste', photo)
 
         const greaterThanOne =
             parseInt(event.target[1].value) > 1 ? true : false
@@ -116,10 +126,10 @@ function PetForm({ onFormSave, onFormClose }) {
     }
 
     return (
-        <div className="md:mt-24 mt-12 border-2 w-4/5 border-black mx-auto md:w-1/2">
+        <div className="sm:mt-24 mt-12 border-2 w-4/5 border-black mx-auto sm:w-8/12 bg-slate-200 p-4">
             <div className="flex flex-row justify-end">
                 <button
-                    className="hover:translate-y-1 md:bg-red-400"
+                    className="hover:translate-y-1 bg-red-400"
                     onClick={closeForm}
                 >
                     <img
@@ -132,12 +142,14 @@ function PetForm({ onFormSave, onFormClose }) {
 
             <form
                 onSubmit={submitHandler}
-                className="flex flex-col text-center flex-wrap border-red-600 border-2"
+                className="flex flex-col text-center flex-wrap"
             >
-                <div className="flex flex-col flex-wrap mt-2 p-2 md:flex-nowrap ">
-                    <label htmlFor="name">Nome</label>
+                <div className="flex flex-col flex-wrap mt-2 p-2 sm:flex-nowrap sm:justify-center">
+                    <label htmlFor="name" className="font-semibold text-lg">
+                        Nome
+                    </label>
                     <input
-                        className="md:mx-2 mx-auto border-2 rounded-sm border-black"
+                        className="sm:mx-2 mx-auto border rounded-sm border-black"
                         type="text"
                         name="name"
                         id="name"
@@ -148,10 +160,12 @@ function PetForm({ onFormSave, onFormClose }) {
                     />
                 </div>
                 <div className="m-2">
-                    <div className="p-2 md:flex-row flex flex-col md:justify-center">
-                        <label htmlFor="age">Idade</label>
+                    <div className="p-2 flex flex-col">
+                        <label htmlFor="age" className="font-semibold text-lg">
+                            Idade
+                        </label>
                         <input
-                            className="mx-auto md:mx-2 border-2 rounded-sm border-black"
+                            className="mx-auto sm:mx-2 border rounded-sm border-black"
                             type="text"
                             name="age"
                             id="age"
@@ -163,7 +177,9 @@ function PetForm({ onFormSave, onFormClose }) {
                             required
                         />
                     </div>
-                    <label htmlFor="months">Meses</label>
+                    <label htmlFor="months" className="font-semibold text-lg">
+                        Meses
+                    </label>
                     <input
                         className="mx-2 border-2 rounded-sm border-black"
                         type="radio"
@@ -172,9 +188,11 @@ function PetForm({ onFormSave, onFormClose }) {
                         value="month"
                         checked
                     />
-                    <label htmlFor="years">Anos</label>
+                    <label htmlFor="years" className="font-semibold text-lg">
+                        Anos
+                    </label>
                     <input
-                        className="mx-2 border-2 rounded-sm border-black"
+                        className="mx-2 border rounded-sm border-black"
                         type="radio"
                         name="age-type"
                         id="years"
@@ -182,9 +200,14 @@ function PetForm({ onFormSave, onFormClose }) {
                     />
                 </div>
                 <div className="m-2 flex flex-col">
-                    <label htmlFor="description">Descrição</label>
+                    <label
+                        htmlFor="description"
+                        className="font-semibold text-lg"
+                    >
+                        Descrição
+                    </label>
                     <textarea
-                        className="mx-2 border-2 rounded-sm border-black"
+                        className="mx-2 border rounded-sm border-black"
                         name="description"
                         id="description"
                         placeholder="Digite a descrição que quiser"
@@ -194,10 +217,15 @@ function PetForm({ onFormSave, onFormClose }) {
                         value={userInput.petDescription}
                     />
                 </div>
-                <div className="m-2 flex flex-col md:flex-row md:justify-center">
-                    <label htmlFor="responsible">Resposável</label>
+                <div className="m-2 flex flex-col">
+                    <label
+                        htmlFor="responsible"
+                        className="font-semibold text-lg"
+                    >
+                        Resposável
+                    </label>
                     <input
-                        className="mx-2 border-2 rounded-sm border-black"
+                        className="mx-2 border rounded-sm border-black"
                         type="text"
                         name="responsible"
                         id="responsible"
@@ -207,10 +235,12 @@ function PetForm({ onFormSave, onFormClose }) {
                         required
                     />
                 </div>
-                <div className="m-2 flex flex-col md:flex-row md:justify-center">
-                    <label htmlFor="phone">Contato</label>
+                <div className="m-2 flex flex-col">
+                    <label htmlFor="phone" className="font-semibold text-lg">
+                        Contato
+                    </label>
                     <input
-                        className="mx-2 border-2 rounded-sm border-black"
+                        className="mx-2 border rounded-sm border-black"
                         type="tel"
                         name="phone"
                         id="phone"
@@ -222,7 +252,22 @@ function PetForm({ onFormSave, onFormClose }) {
                     <small>Format: (21)-9XXXX-XXXX</small>
                 </div>
 
-                <button className="m-2 p-2 border-2 border-black mx-auto">
+                <div className="m-2 flex flex-col">
+                    <label htmlFor="photo" className="font-semibold text-lg">
+                        Escolha as fotos que deseja fazer Upload
+                    </label>
+                    <input
+                        className="mx-2 border rounded-sm border-black"
+                        type="file"
+                        value={photo}
+                        onChange={handlePhoto}
+                        id="photo"
+                        accept="image/png, image/jpeg, image/svg+xml"
+                        multiple
+                    />
+                </div>
+
+                <button className="m-2 p-2 border-2 border-black mx-auto bg-blue-400 hover:translate-x-1">
                     Enviar
                 </button>
             </form>

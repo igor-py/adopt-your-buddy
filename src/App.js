@@ -82,10 +82,13 @@ function App() {
 
             <Route path="/cadastro">
                 {showForm ? (
-                    <PetForm
-                        onFormSave={savePetFormData}
-                        onFormClose={handleFormClose}
-                    />
+                    <>
+                        <PetForm
+                            onFormSave={savePetFormData}
+                            onFormClose={handleFormClose}
+                        />
+                        <Footer />
+                    </>
                 ) : (
                     <Button
                         onButtonClick={handleFormButton}
@@ -93,7 +96,6 @@ function App() {
                         color="bg-[#07B6D4]"
                     />
                 )}
-                <Footer />
             </Route>
 
             <Route path="/mapa">
@@ -114,7 +116,6 @@ function App() {
                 ))}
                 <Footer />
             </Route>
-            
         </>
     )
 }
