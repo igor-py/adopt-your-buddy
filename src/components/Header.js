@@ -1,7 +1,7 @@
 import catImg from '../images/cat-alt-1.svg'
 import { NavLink } from 'react-router-dom'
 
-function Header({ title }) {
+function Header({}) {
     return (
         <div className="bg-header-color">
             <div className="flex flex-row flew-wrap justify-between p-2 content-center">
@@ -14,13 +14,6 @@ function Header({ title }) {
                         ></img>
                     </button>
                 </div>
-
-                {/* <div className="sm:w-1/7 hidden sm:block sm:ml-8 my-2 border-2 border-indigo-600 rounded-md shadow-lg shadow-indigo-500/50">
-                    <h1 className="sm:text-4xl text-2xl text-black text-center p-2 sm:m-2">
-                        {title}
-                    </h1>
-                </div> */}
-
 
                 <div className="my-auto sm:mr-4">
                     <NavLink

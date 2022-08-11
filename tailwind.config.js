@@ -10,6 +10,12 @@ module.exports = {
                 'legend-color': '#EEE2DF'
             },
         },
+        screens: {
+            'sm': '640px',
+            'md': '768px',
+            'lg': '1024px',
+            '2xl': '1800px'
+        }
 	},
 	plugins: [],
 };

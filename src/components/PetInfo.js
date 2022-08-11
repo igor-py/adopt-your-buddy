@@ -24,11 +24,11 @@ const PetInfo = ({ key, name, lstImg, description, age, contact, isMonth }) => {
     return (
         <div
             className="sm:w-5/6 mx-auto m-2 py-4 sm:border-2 rounded-md border-black flex 
-                        flex-col justify-center content-center bg-purple-100"
+                        flex-col justify-center content-center bg-purple-100 2xl:w-1/2"
         >
             <div
                 className="sm:border-2 border-zinc-300 rounded-md shadow-md w-9/12 m-2 bg-blue-200 
-                            flex flex-col justify-evenly content-center mx-auto"
+                            flex flex-col justify-evenly content-center mx-auto 2xl:p-8 lg:w-1/2"
             >
                 <h1 className="mt-2 text-center font-serif font-semibold">
                     Nome
@@ -68,9 +68,12 @@ const PetInfo = ({ key, name, lstImg, description, age, contact, isMonth }) => {
                     {description}
                 </div>
             </div>
-            <div className="sm:rounded-md sm:shadow-md sm:w-1/2 m-2 mx-auto sm:bg-stone-400 p-2 sm:p-0">
+            <div
+                className="sm:rounded-md sm:shadow-md sm:w-1/2 m-2 mx-auto 
+                    md:w-1/2 lg:w-1/3 md:bg-white  p-2 sm:p-0"
+            >
                 <img
-                    className="w-9/12 sm:h-[32rem] h-1/2 mx-auto "
+                    className="w-9/12 sm:h-[32rem] h-1/2 mx-auto sm:w-full "
                     src={image}
                     alt="Cat with a headphone"
                 ></img>

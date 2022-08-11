@@ -1,4 +1,3 @@
-import Input from './InputUtil'
 import { useState, useEffect, useRef } from 'react'
 import xImg from '../images/x.svg'
 
@@ -10,8 +9,9 @@ function PetForm({ onFormSave, onFormClose }) {
         petDescription: '',
         petResponsible: '',
         petPhone: '',
-        petCep: '',
+        petPhotos: [],
     })
+
     const [photo, setPhoto] = useState('')
     const fileInput = useRef(null)
 
@@ -71,16 +71,10 @@ function PetForm({ onFormSave, onFormClose }) {
         })
     }
 
-    const petCepHandler = (event) => {
-        setUserInput((prevState) => {
-            return { ...prevState, petCep: event.target.value }
-        })
-    }
-
     const handlePhoto = (event) => {
         const files = Object.values(event.target.files)
-        files.forEach((file) => {
-            console.log('Arquivo aqui ', file)
+        setUserInput((prevState) => {
+            return { ...prevState, petPhotos: files }
         })
     }
 
@@ -90,7 +84,6 @@ function PetForm({ onFormSave, onFormClose }) {
 
         // Coleta os valores de input do campo Name
         console.log('Event', event)
-        console.log('Teste', photo)
 
         const greaterThanOne =
             parseInt(event.target[1].value) > 1 ? true : false
@@ -106,6 +99,7 @@ function PetForm({ onFormSave, onFormClose }) {
             responsible: event.target[5].value,
             phone: event.target[6].value,
             position: responsiblePosition,
+            lstOfImages: userInput.petPhotos,
         }
 
         onFormSave(petData)
@@ -118,6 +112,7 @@ function PetForm({ onFormSave, onFormClose }) {
             petDescription: '',
             petResponsible: '',
             petPhone: '',
+            petPhotos: [],
         })
     }
 
@@ -126,7 +121,7 @@ function PetForm({ onFormSave, onFormClose }) {
     }
 
     return (
-        <div className="sm:mt-24 mt-12 border-2 w-4/5 border-black mx-auto sm:w-8/12 bg-slate-200 p-4">
+        <div className="sm:mt-24 mt-12 border-2 border-black mx-auto sm:w-8/12 bg-slate-200 sm:p-4">
             <div className="flex flex-row justify-end">
                 <button
                     className="hover:translate-y-1 bg-red-400"
@@ -142,10 +137,13 @@ function PetForm({ onFormSave, onFormClose }) {
 
             <form
                 onSubmit={submitHandler}
-                className="flex flex-col text-center flex-wrap"
+                className="flex flex-col text-center flex-wrap sm:p-4"
             >
-                <div className="flex flex-col flex-wrap mt-2 p-2 sm:flex-nowrap sm:justify-center">
-                    <label htmlFor="name" className="font-semibold text-lg">
+                <div className="flex flex-col flex-wrap mt-2 p-2 sm:flex-nowrap justify-center">
+                    <label
+                        htmlFor="name"
+                        className="sm:font-semibold sm:text-lg"
+                    >
                         Nome
                     </label>
                     <input
@@ -161,7 +159,10 @@ function PetForm({ onFormSave, onFormClose }) {
                 </div>
                 <div className="m-2">
                     <div className="p-2 flex flex-col">
-                        <label htmlFor="age" className="font-semibold text-lg">
+                        <label
+                            htmlFor="age"
+                            className="sm:font-semibold sm:text-lg"
+                        >
                             Idade
                         </label>
                         <input
@@ -177,7 +178,10 @@ function PetForm({ onFormSave, onFormClose }) {
                             required
                         />
                     </div>
-                    <label htmlFor="months" className="font-semibold text-lg">
+                    <label
+                        htmlFor="months"
+                        className="sm:font-semibold sm:text-lg"
+                    >
                         Meses
                     </label>
                     <input
@@ -188,7 +192,10 @@ function PetForm({ onFormSave, onFormClose }) {
                         value="month"
                         checked
                     />
-                    <label htmlFor="years" className="font-semibold text-lg">
+                    <label
+                        htmlFor="years"
+                        className="sm:font-semibold sm:text-lg"
+                    >
                         Anos
                     </label>
                     <input
@@ -202,12 +209,12 @@ function PetForm({ onFormSave, onFormClose }) {
                 <div className="m-2 flex flex-col">
                     <label
                         htmlFor="description"
-                        className="font-semibold text-lg"
+                        className="sm:font-semibold sm:text-lg"
                     >
                         Descrição
                     </label>
                     <textarea
-                        className="mx-2 border rounded-sm border-black"
+                        className="sm:mx-2 border rounded-sm border-black sm:w-10/12 w-1/2 mx-auto"
                         name="description"
                         id="description"
                         placeholder="Digite a descrição que quiser"
@@ -220,12 +227,12 @@ function PetForm({ onFormSave, onFormClose }) {
                 <div className="m-2 flex flex-col">
                     <label
                         htmlFor="responsible"
-                        className="font-semibold text-lg"
+                        className="sm:font-semibold sm:text-lg"
                     >
                         Resposável
                     </label>
                     <input
-                        className="mx-2 border rounded-sm border-black"
+                        className="sm:mx-2 border rounded-sm border-black w-1/2 mx-auto sm:w-full"
                         type="text"
                         name="responsible"
                         id="responsible"
@@ -236,11 +243,14 @@ function PetForm({ onFormSave, onFormClose }) {
                     />
                 </div>
                 <div className="m-2 flex flex-col">
-                    <label htmlFor="phone" className="font-semibold text-lg">
+                    <label
+                        htmlFor="phone"
+                        className="sm:font-semibold sm:text-lg"
+                    >
                         Contato
                     </label>
                     <input
-                        className="mx-2 border rounded-sm border-black"
+                        className="sm:mx-2 border rounded-sm border-black w-1/2 mx-auto sm:w-full"
                         type="tel"
                         name="phone"
                         id="phone"
@@ -253,15 +263,18 @@ function PetForm({ onFormSave, onFormClose }) {
                 </div>
 
                 <div className="m-2 flex flex-col">
-                    <label htmlFor="photo" className="font-semibold text-lg">
+                    <label
+                        htmlFor="photo"
+                        className="sm:font-semibold sm:text-lg w-1/2 sm:w-full sm:mx-0 mx-auto"
+                    >
                         Escolha as fotos que deseja fazer Upload
                     </label>
                     <input
-                        className="mx-2 border rounded-sm border-black"
+                        className="sm:mx-2 border rounded-sm border-black w-1/2 sm:w-full mx-auto"
                         type="file"
-                        value={photo}
                         onChange={handlePhoto}
                         id="photo"
+                        name="photo"
                         accept="image/png, image/jpeg, image/svg+xml"
                         multiple
                     />

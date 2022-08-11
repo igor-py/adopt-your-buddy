@@ -37,7 +37,6 @@ const DUMMY_PETS = [
 ]
 
 function App() {
-    const title = 'ADOTE'
 
     const savePetFormData = (formData) => {
         console.log('Veio savePetFormData ', formData)
@@ -70,7 +69,7 @@ function App() {
 
     return (
         <>
-            <Header title={title}></Header>
+            <Header></Header>
             <Route exact path="/">
                 <Redirect to="/home" />
             </Route>
