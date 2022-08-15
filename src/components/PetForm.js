@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import xImg from '../images/x.svg'
+import authService from '../auth/authService'
 
 function PetForm({ onFormSave, onFormClose }) {
     const [responsiblePosition, setResponsiblePosition] = useState([])
@@ -114,6 +115,22 @@ function PetForm({ onFormSave, onFormClose }) {
             petPhone: '',
             petPhotos: [],
         })
+
+        callBackend(petData)
+    }
+
+    const callBackend = async (petData) => {
+        try {
+            return await authService.register(petData)
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.responde.data.message) ||
+                error.message ||
+                error.toString()
+            console.log(message)
+        }
     }
 
     const closeForm = () => {
