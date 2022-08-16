@@ -1,14 +1,15 @@
 import axios from 'axios'
 
-const instance = axios.create({baseURL: 'http://localhost:8080'})
-const API_URL = '/api/users/login'
+const instance = axios.create({ baseURL: 'http://localhost:8080' })
+const API_URL = '/api/pets/register'
 
-// Register user
+// Register Pet
 const register = async (userData) => {
     const response = await instance.post(API_URL, userData)
     console.log('Response --> ', response)
+    console.log('userData --> ', userData)
 
-    if(response.data) {
+    if (response.data) {
         console.log('Response data ', response.data)
         // localStorage.setItem('user', JSON.stringify(response.data))
     }
@@ -17,7 +18,7 @@ const register = async (userData) => {
 }
 
 const authService = {
-    register
+    register,
 }
 
 export default authService

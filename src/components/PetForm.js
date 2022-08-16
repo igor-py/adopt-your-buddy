@@ -94,18 +94,23 @@ function PetForm({ onFormSave, onFormClose }) {
             : `${greaterThanOne ? 'Anos' : 'Ano'}`
 
         const petData = {
-            name: event.target[0].value,
-            age: `${event.target[1].value} ${monthOrYear}`,
-            description: event.target[4].value,
-            responsible: event.target[5].value,
-            phone: event.target[6].value,
+            email: event.target[5].value,
             position: responsiblePosition,
-            lstOfImages: userInput.petPhotos,
+            pets: {
+                name: event.target[0].value,
+                age: event.target[1].value,
+                description: event.target[4].value,
+                phone: event.target[6].value,
+
+                lstOfImages: userInput.petPhotos,
+                isMonth: event.target[2].checked,
+                pettype: 'cat',
+            },
         }
 
         onFormSave(petData)
 
-        console.log('petData', petData, responsiblePosition)
+        // console.log('petData', petData, responsiblePosition)
         // Tem que limpar os valores antigos do campos.
         setUserInput({
             petName: '',
@@ -253,7 +258,7 @@ function PetForm({ onFormSave, onFormClose }) {
                         type="text"
                         name="responsible"
                         id="responsible"
-                        placeholder="Digite o nome do Resposável"
+                        placeholder="Digite o email do Resposável"
                         value={userInput.petResponsible}
                         onChange={petResponsibleHandler}
                         required
