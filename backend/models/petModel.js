@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const validator = require('validator')
 
 const petSchema = mongoose.Schema(
     {
@@ -6,14 +7,17 @@ const petSchema = mongoose.Schema(
             type: String,
             required: [true, 'Adcione o email do Responsável'],
             unique: true,
-            lowercase: true
+            lowercase: true,
+            validate: (value) => {
+                return validator.isEmail(value)
+            },
         },
         position: [],
         breed: {
             type: String,
             default: 'cat',
         },
-        pets: {
+        pets: [{
             phone: {
                 type: Number,
                 required: [true, 'Adcione o celular do Responsável'],
@@ -38,7 +42,7 @@ const petSchema = mongoose.Schema(
                     type: Buffer,
                 },
             ],
-        },
+        }],
     },
     {
         timestamps: true,

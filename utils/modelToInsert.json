@@ -1,0 +1,17 @@
+{
+    "email": "teste@gmail.com",
+    "position": [
+        -22.8797484,
+        -43.0975309
+    ],
+    "breed": "cat",
+    "pets": {
+        "name": "Simba",
+        "age": 2,
+        "description": "Testando a inserção de Documentos",
+        "phone": "11987654432",
+        "lstOfImages": [],
+        "isMonth": true,
+        "pettype": "cat"
+    }
+}

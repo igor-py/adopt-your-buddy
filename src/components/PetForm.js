@@ -84,33 +84,41 @@ function PetForm({ onFormSave, onFormClose }) {
         event.preventDefault()
 
         // Coleta os valores de input do campo Name
-        console.log('Event', event)
+        // console.log('Event', event)
 
         const greaterThanOne =
             parseInt(event.target[1].value) > 1 ? true : false
 
-        const monthOrYear = event.target[2].checked
-            ? `${greaterThanOne ? 'Meses' : 'Mês'}`
-            : `${greaterThanOne ? 'Anos' : 'Ano'}`
+        const monthOrYear =
+            event.target.elements['age-type'].value == 'month'
+                ? `${greaterThanOne ? 'Meses' : 'Mês'}`
+                : `${greaterThanOne ? 'Anos' : 'Ano'}`
+
+        const isMonth =
+            event.target.elements['age-type'].value == 'month' ? true : false
+
+        const catOrDog = event.target.elements['pet-type'].value
+            ? event.target.elements['pet-type'].value
+            : 'cat'
 
         const petData = {
-            email: event.target[5].value,
+            email: event.target[7].value,
             position: responsiblePosition,
             pets: {
                 name: event.target[0].value,
                 age: event.target[1].value,
-                description: event.target[4].value,
-                phone: event.target[6].value,
+                description: event.target[6].value,
+                phone: event.target[8].value,
 
                 lstOfImages: userInput.petPhotos,
-                isMonth: event.target[2].checked,
-                pettype: 'cat',
+                isMonth: isMonth,
+                pettype: catOrDog,
             },
         }
 
         onFormSave(petData)
 
-        // console.log('petData', petData, responsiblePosition)
+        // console.log('petData', petData)
         // Tem que limpar os valores antigos do campos.
         setUserInput({
             petName: '',
@@ -212,7 +220,6 @@ function PetForm({ onFormSave, onFormClose }) {
                         name="age-type"
                         id="months"
                         value="month"
-                        checked
                     />
                     <label
                         htmlFor="years"
@@ -228,6 +235,39 @@ function PetForm({ onFormSave, onFormClose }) {
                         value="year"
                     />
                 </div>
+
+                <div className="m-2 bg-slate-100 border border-white rounded-sm">
+                    <h2 className="font-medium text-lg text-gray-900">
+                        Selecione qual o tipo de pet?
+                    </h2>
+                    <label
+                        htmlFor="cat"
+                        className="sm:font-semibold sm:text-lg"
+                    >
+                        Gato
+                    </label>
+                    <input
+                        className="mx-2 border-2 rounded-sm border-black"
+                        type="radio"
+                        name="pet-type"
+                        id="cat"
+                        value="cat"
+                    />
+                    <label
+                        htmlFor="dog"
+                        className="sm:font-semibold sm:text-lg"
+                    >
+                        Cachorro
+                    </label>
+                    <input
+                        className="mx-2 border rounded-sm border-black"
+                        type="radio"
+                        name="pet-type"
+                        id="dog"
+                        value="dog"
+                    />
+                </div>
+
                 <div className="m-2 flex flex-col">
                     <label
                         htmlFor="description"

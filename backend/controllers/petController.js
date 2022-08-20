@@ -6,8 +6,6 @@ const Pet = require('../models/petModel')
 // @access public
 const registerPet = asyncHandler(async (req, res) => {
     const { email, pets } = req.body
-    console.log('Entrou para registrar ', req.body)
-    console.log('Pets ', pets)
 
     if (!email) {
         throw new Error('Não preencheu o email!!')
@@ -16,27 +14,39 @@ const registerPet = asyncHandler(async (req, res) => {
     const responsibleExist = await Pet.findOne({ email })
 
     if (responsibleExist) {
-        // const result = await Pet.updateOne(
-        //     {
-        //         email,
-        //     },
-        //     req.body
-        // )
-        // if (result.upsertedCount === 0) {
-        //     res.status(400)
-        //     throw new Error('Update falhou')
-        // }
-        res.status(400)
-        console.log('Responsável já existe')
-        throw new Error('Update falhou')
+        const copyArray = responsibleExist.pets
+        copyArray.push(pets)
+        let newBreed = responsibleExist.breed
+
+        if (responsibleExist.breed != 'both') {
+            copyArray.forEach((pet) => {
+                if (pet.pettype != responsibleExist.breed) {
+                    newBreed = 'both'
+                }
+            })
+        }
+
+        const updateReturn = await Pet.updateOne(
+            { _id: responsibleExist._id },
+            {
+                pets: copyArray,
+                breed: newBreed,
+            }
+        )
+
+        if (updateReturn.modifiedCount == 1) {
+            res.status(201).json({
+                message: 'Atualizado com sucesso',
+            })
+        }
     } else {
-        console.log('Vindo Else ')
         const pet = await Pet.create(req.body)
 
         if (pet) {
             res.status(201).json({
                 _id: pet._id,
                 email: pet.email,
+                message: 'Criado com sucesso',
             })
         }
     }
