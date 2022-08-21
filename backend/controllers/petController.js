@@ -52,6 +52,45 @@ const registerPet = asyncHandler(async (req, res) => {
     }
 })
 
+const getPets = asyncHandler(async (req, res) => {
+    const result = await Pet.find({})
+
+    if (result) {
+        res.status(201).json({
+            message: 'Retornou todos os registros',
+            data: result,
+        })
+        return result
+    } else {
+        res.status(400).json({
+            message: 'ERROR',
+        })
+        return undefined
+    }
+})
+
+const getPetById = asyncHandler(async (req, res) => {
+    const { id } = req.body
+
+    const result = await Pet.findOne({ _id: id })
+
+    if (result) {
+        res.status(201).json({
+            message: 'Registro Encontrado com Sucesso!!',
+            data: result,
+        })
+        return result
+    } else {
+        res.status(400).json({
+            message: 'Registro não encontrado',
+            data: null,
+        })
+        return undefined
+    }
+})
+
 module.exports = {
     registerPet,
+    getPets,
+    getPetById,
 }

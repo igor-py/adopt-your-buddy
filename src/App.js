@@ -37,7 +37,6 @@ const DUMMY_PETS = [
 ]
 
 function App() {
-
     const savePetFormData = (formData) => {
         console.log('Veio savePetFormData ', formData)
         const finalFormData = {

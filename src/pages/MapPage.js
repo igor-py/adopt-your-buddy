@@ -6,6 +6,7 @@ import { useHistory, Prompt } from 'react-router-dom'
 import * as L from 'leaflet'
 
 import Button from '../components/Button'
+import authService from '../auth/authService'
 
 import petDatabase from '../data/database'
 import petCatIconSvg from '../images/icons/cat-svgrepo-com.svg'
@@ -14,13 +15,14 @@ import petCatDogIconSvg from '../images/icons/cat-dog.svg'
 import loadingIcon from '../images/icons/loading-svgrepo-com.svg'
 
 function MapPage({}) {
-    const [petDatabaseCopy, setPetDatabaseCopy] = useState(petDatabase)
+    const [petDatabaseCopy, setPetDatabaseCopy] = useState(undefined)
     const [loadingCss, setLoadingCss] = useState(
         'mx-auto mt-2 animate-spin h-16 w-16'
     )
     const [clickedMarker, setClickedMarker] = useState(false)
     const [msgToShow, setMsgToShow] = useState('')
     const history = useHistory()
+    let dataForMap
 
     // Utilizar esse array aqui para centralizar o mapa, incialmente
     const center = [-22.86, -43.09]
@@ -32,10 +34,20 @@ function MapPage({}) {
 
     // Use of componentDidMount for functions
     useEffect(() => {
-        handleMap()
+        initHandler()
     }, [])
 
-    const handleMap = () => {
+    const initHandler = () => {
+        authService.getAll().then((allPets) => {
+            console.log('Passando all pets ', allPets)
+            handleMap(allPets)
+        })
+    }
+
+    const handleMap = (petData) => {
+        console.log('Entrou handleMap ', petData)
+        dataForMap = petData
+
         catIcon = L.icon({
             iconUrl: petCatIconSvg,
             iconSize: [38, 95],
@@ -80,16 +92,19 @@ function MapPage({}) {
     }
 
     function setDataForMap() {
-        petDatabaseCopy.forEach((data) => {
+        console.log('Entrou set Data for map')
+
+        dataForMap.forEach((data) => {
+            console.log('Data entrando ', data)
             const iconToShow =
                 data.breed == 'both'
                     ? catAndDogIcon
                     : data.breed == 'cat'
                     ? catIcon
                     : dogIcon
-            const marker = L.marker(data.local, {
+            const marker = L.marker(data.position, {
                 icon: iconToShow,
-                title: data.id,
+                title: data._id,
             })
                 .addTo(map)
                 .on('click', (e) => {
@@ -98,14 +113,14 @@ function MapPage({}) {
                     setClickedMarker(true)
                     setMsgToShow(
                         `----------------------------------
-                        Responsável: ${data.responsible}
+                        Responsável: ${data.email}
                         Número de pets: ${data.pets.length}
                         -----------------------------------
                         Deseja abrir a página de Pets para esse local?`
                     )
 
                     // Maneira de mandar para a pagina ja passando o ID a ser utilizado
-                    history.push('/pets/'+idToOpen)
+                    history.push('/pets/' + idToOpen)
                 })
             // const msg = `Responsável: ${data.responsible} - ${data.id}`
             // marker.bindPopup(msg)
@@ -123,7 +138,7 @@ function MapPage({}) {
                 }}
             />
 
-            <img className={loadingCss} src={loadingIcon} alt="Cat Logo"></img>
+            <img className={loadingCss} src={loadingIcon} alt="Loading"></img>
 
             <div id="map" className="border-2 bg-slate-50"></div>
             <div

@@ -37,13 +37,13 @@ function Header({}) {
                     >
                         Cadastro
                     </NavLink>
-                    <NavLink
+                    {/* <NavLink
                         to="/pets"
                         activeClassName="text-green-700 underline underline-offset-4"
                         className="hover:text-teal-900 my-auto mx-2"
                     >
                         Pets
-                    </NavLink>
+                    </NavLink> */}
                 </div>
             </div>
         </div>

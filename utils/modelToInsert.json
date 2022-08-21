@@ -5,13 +5,24 @@
         -43.0975309
     ],
     "breed": "cat",
-    "pets": {
-        "name": "Simba",
-        "age": 2,
-        "description": "Testando a inserção de Documentos",
-        "phone": "11987654432",
-        "lstOfImages": [],
-        "isMonth": true,
-        "pettype": "cat"
-    }
+    "pets": [
+        {
+            "name": "Simba",
+            "age": 2,
+            "description": "Testando a inserção de Documentos",
+            "phone": "11987654432",
+            "lstOfImg": [],
+            "isMonth": true,
+            "pettype": "cat"
+        },
+        {
+            "name": "Gato 2",
+            "age": 2,
+            "description": "Testando o retorno de documentos",
+            "phone": "11987654432",
+            "lstOfImg": [],
+            "isMonth": true,
+            "pettype": "cat"
+        }
+    ]
 }
