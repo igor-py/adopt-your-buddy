@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const teste = true
+const teste = false
 
 const SERVER_URL = teste
     ? 'http://localhost:8080'
