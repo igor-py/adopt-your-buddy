@@ -1,6 +1,11 @@
 import axios from 'axios'
 
-const instance = axios.create({ baseURL: 'http://localhost:8080' })
+const teste = false;
+const SERVER_URL =
+    teste == 'development'
+        ? 'http://localhost:8080'
+        : 'https://adoptyourbuddypetapp.herokuapp.com'
+const instance = axios.create({ baseURL: SERVER_URL })
 const REGISTER_API_URL = '/api/pets/register'
 const GET_API_URL = '/api/pets'
 const GET_BY_ID_API_URL = '/api/pets/pet'
