@@ -1,6 +1,7 @@
 {
     "name": "adopt-your-buddy",
     "version": "0.1.0",
+    "engines": "16.x",
     "private": true,
     "dependencies": {
         "@headlessui/react": "^1.4.3",
