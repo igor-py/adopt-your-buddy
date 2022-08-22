@@ -4,7 +4,7 @@ const teste = false
 
 const SERVER_URL = teste
     ? 'http://localhost:8080'
-    : 'https://adoptyourbuddypetapp.herokuapp.com'
+    : 'https://adoptyourbuddypetapp.herokuapp.com:8080'
 const instance = axios.create({ baseURL: SERVER_URL })
 const REGISTER_API_URL = '/api/pets/register'
 const GET_API_URL = '/api/pets'
