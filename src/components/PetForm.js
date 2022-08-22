@@ -73,9 +73,11 @@ function PetForm({ onFormSave, onFormClose }) {
     }
 
     const handlePhoto = (event) => {
-        const files = Object.values(event.target.files)
+        console.log('FIles ev', event)
+        // const files = Object.values(event.target.files)
+        // console.log('files ', files)
         setUserInput((prevState) => {
-            return { ...prevState, petPhotos: files }
+            return { ...prevState, petPhotos: [event.target.value] }
         })
     }
 
@@ -84,7 +86,7 @@ function PetForm({ onFormSave, onFormClose }) {
         event.preventDefault()
 
         // Coleta os valores de input do campo Name
-        // console.log('Event', event)
+        console.log('Event Principal', event)
 
         const greaterThanOne =
             parseInt(event.target[1].value) > 1 ? true : false
@@ -110,15 +112,15 @@ function PetForm({ onFormSave, onFormClose }) {
                 description: event.target[6].value,
                 phone: event.target[8].value,
 
-                lstOfImages: userInput.petPhotos,
+                lstOfImg: userInput.petPhotos,
                 isMonth: isMonth,
                 pettype: catOrDog,
             },
         }
 
-        onFormSave(petData)
+        // onFormSave(petData)
 
-        // console.log('petData', petData)
+        console.log('petData', petData)
         // Tem que limpar os valores antigos do campos.
         setUserInput({
             petName: '',
@@ -168,6 +170,7 @@ function PetForm({ onFormSave, onFormClose }) {
             <form
                 onSubmit={submitHandler}
                 className="flex flex-col text-center flex-wrap sm:p-4"
+                encType="multipart/form-data"
             >
                 <div className="flex flex-col flex-wrap mt-2 p-2 sm:flex-nowrap justify-center">
                     <label
@@ -337,8 +340,7 @@ function PetForm({ onFormSave, onFormClose }) {
                         onChange={handlePhoto}
                         id="photo"
                         name="photo"
-                        accept="image/png, image/jpeg, image/svg+xml"
-                        multiple
+                        accept="image/png, image/jpeg"
                     />
                 </div>
 

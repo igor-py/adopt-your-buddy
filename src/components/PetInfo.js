@@ -1,23 +1,32 @@
 import { useState, useEffect } from 'react'
 import useImage from '../utils/useImage'
 import Button from './Button'
+import { Buffer } from 'buffer'
 
 const PetInfo = ({ key, name, lstImg, description, age, contact, isMonth }) => {
     const [imgPosition, setImgPosition] = useState(0)
+    const [bufferImg, setBufferImg] = useState(0)
     const loadImage = (imageName) => setImg(imageName)
     const [img, setImg] = useState()
     const { loading, error, image } = useImage(img)
+    const lstImg2 = ['Nala 1.jpg', 'Nala 2.jpg', 'Nala 3.jpg']
 
     useEffect(() => {
-        if (lstImg) {
-            loadImage(lstImg[imgPosition])
+        // console.log('lstImg ', lstImg)
+        
+        // setBufferImg(Buffer.from(lstImg[0], 'base64'))
+        
+        if (lstImg2) {
+            loadImage(lstImg2[imgPosition])
         }
-    })
+    }, [imgPosition])
 
     const handleImgClick = () => {
+        console.log('Veio handle Click')
         setImgPosition((prevState) => {
             // Se a imagem for a última, volta para a primeira imagem.
-            return prevState === lstImg.length - 1 ? 0 : prevState + 1
+            console.log(prevState)
+            return prevState === lstImg2.length - 1 ? 0 : prevState + 1
         })
     }
 
@@ -85,7 +94,13 @@ const PetInfo = ({ key, name, lstImg, description, age, contact, isMonth }) => {
             >
                 Mudar de Foto
             </button>
+
+            {/* <div className='m-4'>
+                <img src={`data:image/jpeg;base64,${bufferImg}`}>
+                </img>
+            </div> */}
         </div>
+        
     )
 }
 

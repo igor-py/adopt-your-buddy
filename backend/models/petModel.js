@@ -40,6 +40,7 @@ const petSchema = mongoose.Schema(
             lstOfImg: [
                 {
                     type: Buffer,
+                    contentType: String
                 },
             ],
         }],
