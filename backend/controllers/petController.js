@@ -1,7 +1,5 @@
 const asyncHandler = require('express-async-handler')
 const Pet = require('../models/petModel')
-const fs = require('fs')
-const path = require('path')
 
 // @desc Register a new pet
 // @route /api/save-pets
@@ -13,22 +11,7 @@ const registerPet = asyncHandler(async (req, res) => {
         throw new Error('Não preencheu o email!!')
     }
 
-    console.log('pets ', pets)
     const responsibleExist = await Pet.findOne({ email })
-    const copyImg = pets.lstOfImg.length > 0 ? pets.lstOfImg[0] : undefined
-    console.log('VIndo seguinte img ', copyImg)
-
-    try {
-        const img = fs.readFileSync(copyImg)
-        const encode_img = img.toString('base64')
-        const final_img = {
-            contentType: 'image/jpeg',
-            image: Buffer.from(encode_img, 'base64'),
-        }
-        console.log('Final img ', final_img)
-    } catch (error) {
-        console.log(error)
-    }
 
     if (responsibleExist) {
         const copyArray = responsibleExist.pets

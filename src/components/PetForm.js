@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import xImg from '../images/x.svg'
 import authService from '../auth/authService'
+import FileBase64 from 'react-file-base64'
 
 function PetForm({ onFormSave, onFormClose }) {
     const [responsiblePosition, setResponsiblePosition] = useState([])
@@ -72,12 +73,19 @@ function PetForm({ onFormSave, onFormClose }) {
         })
     }
 
-    const handlePhoto = (event) => {
-        console.log('FIles ev', event)
-        // const files = Object.values(event.target.files)
-        // console.log('files ', files)
+    const handlePhoto = (files) => {
+        console.log('Imagem aqui ', files)
+        const base64Array = files.map((file) => {
+            // return {
+            //     mimeType: file.type,
+            //     name: file.name,
+            //     base64: file.base64,
+            // }
+
+            return file.base64
+        })
         setUserInput((prevState) => {
-            return { ...prevState, petPhotos: [event.target.value] }
+            return { ...prevState, petPhotos: base64Array }
         })
     }
 
@@ -327,7 +335,7 @@ function PetForm({ onFormSave, onFormClose }) {
                     <small>Format: (21)-9XXXX-XXXX</small>
                 </div>
 
-                <div className="m-2 flex flex-col">
+                {/* <div className="m-2 flex flex-col">
                     <label
                         htmlFor="photo"
                         className="sm:font-semibold sm:text-lg w-1/2 sm:w-full sm:mx-0 mx-auto"
@@ -342,6 +350,10 @@ function PetForm({ onFormSave, onFormClose }) {
                         name="photo"
                         accept="image/png, image/jpeg"
                     />
+                </div> */}
+
+                <div className="my-4 border-2 border-black">
+                    <FileBase64 multiple={true} onDone={handlePhoto} />
                 </div>
 
                 <button className="m-2 p-2 border-2 border-black mx-auto bg-blue-400 hover:translate-x-1">

@@ -8,7 +8,6 @@ const PORT = 8080
 const { errorHandler } = require('./middleware/errorMiddleware')
 const connectDB = require('./config/db')
 const app = express()
-const multer = require('multer')
 
 // Connect to database
 connectDB()
@@ -17,16 +16,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, 'uploads')
-//     },
-//     filename: (req, file, cb) => {
-//         cb(null, file.fieldname + '-' + Date.now())
-//     },
-// })
 
-// const upload = multer({ storage: storage })
 
 app.use('/api/pets', require('./routes/userRoutes'))
 
