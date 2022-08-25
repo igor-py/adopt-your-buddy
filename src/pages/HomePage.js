@@ -25,6 +25,22 @@ function HomePage() {
                     >
                         Adote um Pet
                     </h1>
+                    <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-8">
+                        <div className="p-4 m-2">
+                            <img
+                                className="mx-auto hover:scale-105"
+                                src={catPhoto}
+                                alt="Cat Photo"
+                            ></img>
+                        </div>
+                        <div className="border p-4 m-2">
+                            <img
+                                className="mx-auto hover:scale-105"
+                                src={dogPhoto}
+                                alt="Dog photo"
+                            ></img>
+                        </div>
+                    </div>
                     <p className="sm:mt-4 mt-2 font-mono text-justify sm:text-lg">
                         Adotar é muito importante, além de ter um companheiro
                         para todos os momentos voce estará ajudando um bichinho
@@ -34,11 +50,6 @@ function HomePage() {
                     </p>
                 </div>
                 <div className="p-4 my-2 sm:w-1/2 mx-auto">
-                    <img
-                        className="sm:max-h-[60rem] mx-auto h-64"
-                        src={photoWomanWithPet}
-                        alt="Dog Photo"
-                    ></img>
                     <p className="mt-4 font-mono text-justify sm:text-lg">
                         Milhares de pets são abandonados todos os dias no
                         Brasil, esses animaizinhos que podem trazer muita
@@ -47,37 +58,25 @@ function HomePage() {
                     </p>
                     <p className="mt-4 font-mono text-justify sm:text-lg">
                         Adotar salva a vida dos animais e transborda a vida do
-                        tutor de alegria. Faça esse ato de amor: <b className='text-orange-400 text-2xl animate-pulse'>ADOTE!</b>
+                        tutor de alegria. Faça esse ato de amor
                     </p>
                 </div>
-                <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-8">
-                    <div className="p-4 m-2">
-                        <img
-                            className="mx-auto hover:scale-105"
-                            src={catPhoto}
-                            alt="Cat Photo"
-                            onClick={handleAdopt}
-                        ></img>
-                        <div
-                            onClick={handleAdopt}
-                            className="bg-emerald-400 sm:w-1/2 w-7/12 mx-auto text-center font-medium text-2xl animate-pulse"
-                        >
-                            Quer Adotar?
-                        </div>
-                    </div>
-                    <div className="border p-4 m-2">
-                        <img
-                            className="mx-auto hover:scale-105"
-                            src={dogPhoto}
-                            alt="Dog photo"
-                            onClick={handleDonate}
-                        ></img>
-                        <div
-                            onClick={handleDonate}
-                            className="bg-rose-400 sm:w-1/2 w-7/12 mx-auto text-center font-medium text-2xl animate-pulse"
-                        >
-                            Quer Doar?
-                        </div>
+
+                <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-8 w-1/2 mx-auto">
+                    <button
+                        onClick={handleAdopt}
+                        className="bg-emerald-400 hover:bg-emerald-700 mx-auto text-center 
+                        font-medium text-xl shadow border rounded-full p-12 sm:h-44 sm:w-44 w-36 h-36"
+                    >
+                        Quer Adotar?
+                    </button>
+
+                    <div
+                        onClick={handleDonate}
+                        className="bg-rose-400 hover:bg-rose-700 mx-auto text-center font-medium text-xl shadow border 
+                        rounded-full p-12 sm:h-44 sm:w-44 w-36 h-36"
+                    >
+                        Quer Doar?
                     </div>
                 </div>
             </div>
