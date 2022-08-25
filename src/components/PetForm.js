@@ -114,6 +114,7 @@ function PetForm({ onFormSave, onFormClose }) {
         const petData = {
             email: event.target[7].value,
             position: responsiblePosition,
+            breed: catOrDog,
             pets: {
                 name: event.target[0].value,
                 age: event.target[1].value,
@@ -352,8 +353,20 @@ function PetForm({ onFormSave, onFormClose }) {
                     />
                 </div> */}
 
-                <div className="my-4 border-2 border-black">
-                    <FileBase64 multiple={true} onDone={handlePhoto} />
+                <div className="m-2 flex flex-col">
+                    <label
+                        htmlFor="photo"
+                        className="sm:font-semibold sm:text-lg w-1/2 sm:w-full sm:mx-0 mx-auto"
+                    >
+                        Escolha as fotos que deseja fazer Upload
+                    </label>
+                    <div className="sm:mx-2 border rounded-sm border-black w-1/2 sm:w-full mx-auto p-2">
+                        <FileBase64
+                            id="photo"
+                            multiple={true}
+                            onDone={handlePhoto}
+                        />
+                    </div>
                 </div>
 
                 <button className="m-2 p-2 border-2 border-black mx-auto bg-blue-400 hover:translate-x-1">
